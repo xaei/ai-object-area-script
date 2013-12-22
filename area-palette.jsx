@@ -24,24 +24,24 @@ if ( app.documents.length > 0 && app.activeDocument.selection.length > 0 ) {
 
 var scaleList = [s1,s2,s3,s4,s5,s6,s7,s8,s9];
 
-var win = new Window('palette', 'Areas', undefined, {resizeable:true});
-var selectListBox = win.add('listbox',undefined, scaleList, {multiselect: false});
-var msg = scaleList;
-var lblNote = win.add('statictext', undefined, msg, {multiline:true});
+var paletteWindow = new Window('palette', 'Areas', undefined, {resizeable:true});
+var selectListBox = paletteWindow.add('listbox',undefined, scaleList, {multiselect: false});
+var msg = "yay";
+var lblNote = paletteWindow.add('statictext', undefined, msg, {multiline:true});
  
 selectListBox.alignment = ["fill","fill"];
-win.preferredSize = [100,-1];
-win.alignChildren = ["fill", "bottom"];
+paletteWindow.preferredSize = [100,-1];
+paletteWindow.alignChildren = ["fill", "bottom"];
  
 selectListBox.onChange = function () {
     buildMsg (selectListBox.selection.index);
 }
  
-win.onShow = function () {win.layout.resize();}
+win.onShow = function () {paletteWindow.layout.resize();}
  
 // win.center();
-win.show();
- 
+paletteWindow.show();
+
 function buildMsg (alignment) {
  
     var bt = new BridgeTalk;
