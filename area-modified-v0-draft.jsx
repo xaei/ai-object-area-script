@@ -7,8 +7,8 @@ if ( app.documents.length > 0 && app.activeDocument.selection.length > 0 ) {
 //	for (var i in docRef.selection){
 		var pathRef=docRef.selection[0];
 		var pathRefArea=pathRef.area;
-		var pathAreaHumanReadable=(Math.round(Math.abs(pathRefArea))).toFixed(2);
-		var pathAreaInches=(Math.round(pathAreaHumanReadable/5184)).toFixed(2);
+		var pathAreaHumanReadable=(Math.abs(pathRefArea)).toFixed(2);
+		var pathAreaInches=(pathAreaHumanReadable/5184).toFixed(2);
 
 		alert("raw area: "+(pathAreaHumanReadable)+"\n"+
 			"1:1 scale: "+(pathAreaInches)+" sq. in.\n"+
