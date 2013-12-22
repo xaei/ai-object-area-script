@@ -1,6 +1,6 @@
 
 //additions for scaling 131221-112724 AM
-//based on JET Get Area
+//based on JET Get Area & others
 
 #target Illustrator
 #targetengine main
@@ -8,8 +8,7 @@
 if ( app.documents.length > 0 && app.activeDocument.selection.length > 0 ) {
     var docRef=app.activeDocument;    
     var pathRef=docRef.selection[0];
-    var pathRefArea=pathRef.area;
-    var pathAreaPica=(Math.abs(pathRefArea));
+    var pathAreaPica=Math.abs(pathRef.area);
     var pathAreaInches=(pathAreaPica/5184);
     var s1="pica area: "  +pathAreaPica.toFixed(2)+"\n";
     var s2="1:1=1'-0\": " +pathAreaInches.toFixed(2)+" sq. in.\n";
@@ -24,32 +23,35 @@ if ( app.documents.length > 0 && app.activeDocument.selection.length > 0 ) {
 
 var scaleList = [s1,s2,s3,s4,s5,s6,s7,s8,s9];
 
-var paletteWindow = new Window('palette', 'Areas', undefined, {resizeable:true});
-var selectListBox = paletteWindow.add('listbox',undefined, scaleList, {multiselect: false});
+var paletteWindow = new Window('palette', 'Areas' , undefined, {resizeable:true});
+var selectListBox = paletteWindow.add('statictext', undefined, scaleList.join("\n"), {multiline: true});
 var msg = "yay";
 var lblNote = paletteWindow.add('statictext', undefined, msg, {multiline:true});
- 
+
 selectListBox.alignment = ["fill","fill"];
 paletteWindow.preferredSize = [100,-1];
 paletteWindow.alignChildren = ["fill", "bottom"];
- 
-selectListBox.onChange = function () {
-    buildMsg (selectListBox.selection.index);
-}
- 
+
+
 paletteWindow.onShow = function () {paletteWindow.layout.resize();}
  
 // paletteWindow.center();
 paletteWindow.show();
 
-function buildMsg (alignment) {
  
-    var bt = new BridgeTalk;
-    bt.target = "illustrator";         
-    var params = {idx:alignment};
-    var msg = alignSelection + '\ralignSelection(' + params.toSource() + ');';
+// selectListBox.onSelect = function () {
+//     buildMsg (selectListBox.selection.index);
+// }
+
+// function buildMsg (alignment) {
+
+// } 
+//     var bt = new BridgeTalk;
+//     bt.target = "illustrator";         
+//     var params = {idx:alignment};
+//     var msg = alignSelection + '\ralignSelection(' + params.toSource() + ');';
  
-    bt.body = msg;
-    bt.send(); 
-}
+//     bt.body = msg;
+//     bt.send(); 
+// }
 
