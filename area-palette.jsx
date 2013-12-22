@@ -25,7 +25,7 @@ if ( app.documents.length > 0 && app.activeDocument.selection.length > 0 ) {
 var scaleList = [s1,s2,s3,s4,s5,s6,s7,s8,s9];
 
 var paletteWindow = new Window('palette', 'Areas', undefined, {resizeable:true});
-var selectListBox = paletteWindow.add('listbox',undefined, scaleList, {multiselect: false});
+var selectListBox = paletteWindow.add('listbox',undefined, scaleList, {multiselect: true});
 var msg = "yay";
 var lblNote = paletteWindow.add('statictext', undefined, msg, {multiline:true});
  
@@ -37,9 +37,9 @@ selectListBox.onChange = function () {
     buildMsg (selectListBox.selection.index);
 }
  
-paletteWindow.onShow = function () {paletteWindow.layout.resize();}
+win.onShow = function () {paletteWindow.layout.resize();}
  
-// paletteWindow.center();
+// win.center();
 paletteWindow.show();
 
 function buildMsg (alignment) {
